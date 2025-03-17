@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Usuarios {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  nome  String
+  email String @unique
+  cargo String
+  senha String
+  cpf String @unique
+  telefone String
+  otp String?
+  otpExpires DateTime?
+}
+
+model Produtos {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  imagem String
+  nome  String
+  preco  Float
+  peso Float
+  sabores String[]
+  desativado Boolean
+}
+
+model Pedidos {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  dataPedido  String
+  dataFinalPedido  String
+  status  StatusEnum
+  id_usuario  String
+  itens String[] @default([])
+}
+
+// !!CUIDADO!! => Se for mudar os valores de StatusEnum, terá que mudar também os valores na função "statusDisponiveis" presente em utils/functions 
+enum StatusEnum {
+  PENDENTE
+  PAGO
+  ENTREGUE
+  INADIMPLENTE
+  CANCELADO
+}
+model Sabores {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  nome  String?
+}
+
+
+model itemPedido {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  nome  String?
+  quantidade Int
+  descricao String
+  precoUnitario Float
+  precoDaPersonalizacao Float?
+  pesoUnitario Float
+  id_produto String
+  id_pedido String
+  sabor String?
+}
+
+
+model pagamento {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  pagData String
+  valorPago Float
+  id_pagamento String
+  id_pedido String
+}
+
+
+
+
