@@ -1,0 +1,45 @@
+
+Setup do projeto:
+    Após utilizar o comando padrão do next para criar a aplicação, removeremos todos os conteúdos da pasta src.
+
+    Após remover tudo de dentro da src, criaremos essas pastas: pages, styles
+    Dentro de styles criaremos um arquivo chamado globals.css, que ficará vazio por enquanto
+    Agora dentro da pasta pages, criaremos um arquivo chamado _app.js e outro chamado index.jsx
+    O arquivo _app.js é o item que irá chamar e renderizar tudo da aplicação, e tem o valor base:
+        import '../styles/globals.css';
+        function MyApp({ Component, pageProps }) {
+        return <Component {...pageProps} />;
+        }
+        export default MyApp;
+    Quando se tenta ler uma pasta de uma página, a aplicação sempre irá procurar por padrão dentro dessa pasta
+    um arquivo chamado "index", e se tiver o index ele será lido por padrão.
+    Então no nosso caso quando acessamos o nosso site.com, 
+    como não estamos procurando em uma rota específica (ex: site.com/rotaespecifica/loremipsum)
+    ele irá procurar por padrão o arquivo index da página, fazendo assim com que o nosso arquivo index.jsx que criamos
+    seja o item renderizado quando entramos em site.com
+    
+
+Setup do tailwind:
+    Intalar tailwindcss e suas dependencias:
+        $ npm install -D tailwindcss postcss autoprefixer
+    
+    Inicializar o tailwind:
+        $ npx tailwindcss init -p
+    
+    A inicilização no comando anterior cria um arquivo chamado tailwind.config.js que irá armazenar as configurações
+    do seu tailwind, é lá também onde adicionamos customizações do tailwind específicas para o projeto, 
+    tais como animações, cores padrões entre outras.
+    
+    Valor padrão que utilizaremos no tailwind.config.js:
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+    content: [
+        "./src/pages/**/*.{js,ts,jsx,tsx}",
+        "./src/components/**/*.{js,ts,jsx,tsx}",
+    ],
+    theme: {
+        extend: {},
+    },
+    plugins: [],
+    };
+

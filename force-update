@@ -1,0 +1,5 @@
+// Arquivo criado para forçar o update de algum push realizado por alguém que não esteja permitido no painel da vercel
+// Para "forçar" o update este arquivo deve ser atualizado de alguma maneira diretamente pelo github através de uma conta que 
+// esteja permitida para realizar alterações no painel do projeto dentro da vercel.
+
+force_update = ||||||||||||||
